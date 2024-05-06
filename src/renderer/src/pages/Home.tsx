@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Map, { MapRef, Marker } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -6,8 +6,6 @@ const MAPTILER = 'https://api.maptiler.com/maps/streets/style.json?key=ZFtcxc8Up
 
 
 export default function Home() {
-    const [view, setView] = useState({ longitude: 31.234049, latitude: 30.050363, zoom: 14 })
-
     const [long, setLong] = useState(31.234049);
     const [lat, setLat] = useState(30.050363);
 
@@ -16,7 +14,7 @@ export default function Home() {
     const [screenLock, setScreenLock] = useState(true);
 
     useEffect(() => {
-        window.electron.ipcRenderer.on('gps', (event, res) => {
+        window.electron.ipcRenderer.on('gps', (_, res) => {
             setLong(res.long);
             setLat(res.lat);
         })
